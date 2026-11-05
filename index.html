@@ -71,29 +71,22 @@
   }
   .logo img { display: block; width: 100%; height: auto; }
   @keyframes blink {
-    0%, 100% { opacity: 1;   transform: scale(1);    filter: drop-shadow(0 0 0 rgba(7,149,219,0)); }
-    50%      { opacity: .35; transform: scale(.975); filter: drop-shadow(0 0 24px rgba(7,149,219,.35)); }
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .3; }
   }
 
+  /* Status: samo tipografija i tanka linija, bez pilule */
   .status {
-    display: inline-flex; align-items: center; gap: 14px;
-    padding: 16px 28px 16px 22px;
-    border-radius: 999px;
-    background: var(--navy);
-    color: #fff;
-    font-stretch: 112%;
+    width: clamp(180px, 22vw, 300px);
+    padding-top: 18px;
+    border-top: 1px solid rgba(5, 38, 85, .28);
+    color: var(--navy);
+    font-stretch: 125%;
     font-weight: 700;
-    font-size: clamp(17px, 1.6vw, 22px);
-    letter-spacing: .01em;
-    box-shadow: 0 14px 40px -12px rgba(5, 38, 85, .45);
+    font-size: clamp(18px, 1.75vw, 24px);
+    letter-spacing: -.01em;
+    line-height: 1;
   }
-  .dot { position: relative; width: 11px; height: 11px; border-radius: 50%; background: var(--blue); flex: none; }
-  .dot::after {
-    content: ""; position: absolute; inset: -5px; border-radius: 50%;
-    border: 2px solid var(--blue); opacity: 0;
-    animation: ping 1.6s cubic-bezier(.2,.6,.3,1) infinite;
-  }
-  @keyframes ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
 
   .copy {
     position: fixed; z-index: 1;
@@ -106,8 +99,7 @@
   @media (max-width: 759px) {
     .center { min-height: 100dvh; gap: 28px; padding: 24px 16px 56px; }
     .logo { width: min(56vw, 210px); }
-    .status { padding: 13px 22px 13px 18px; font-size: 16px; gap: 12px; }
-    .dot { width: 9px; height: 9px; }
+    .status { width: min(56vw, 210px); padding-top: 16px; font-size: 18px; }
     .copy { left: 0; right: 0; text-align: center; font-size: 11px; }
     .bg__page {
       left: 0; right: 0;
@@ -122,7 +114,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .bg__page, .dot::after { animation: none; }
+    .bg__page { animation: none; }
     .logo { animation-duration: 5s; }
   }
 </style>
@@ -132,7 +124,7 @@
 
   <main class="center">
     <div class="logo"><img src="assets/logo.svg" alt="Cooldown Adria" width="300" height="172"></div>
-    <p class="status" role="status"><span class="dot" aria-hidden="true"></span>WEB u izradi</p>
+    <p class="status" role="status">WEB u izradi</p>
   </main>
   <p class="copy">&copy; <span id="godina">2026</span> Cooldown Adria</p>
   <script>document.getElementById("godina").textContent = new Date().getFullYear();</script>
