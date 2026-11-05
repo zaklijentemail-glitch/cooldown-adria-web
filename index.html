@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cooldown Adria · Stranica u izradi</title>
+<meta name="description" content="Cooldown Adria: hlađenje bez leda. Nova stranica je u izradi.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#f4f7fb">
+<meta property="og:title" content="Cooldown Adria · Hlađenje bez leda.">
+<meta property="og:description" content="Ciljano hlađenje za podršku oporavku. Nova stranica je u izradi.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="hr_HR">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/pozadina-desktop.webp" media="(min-width: 760px)">
+<link rel="preload" as="image" href="assets/pozadina-mobitel.webp" media="(max-width: 759px)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #052655;
+    --blue: #0795db;
+    --ink: #052655;
+    --muted: #3b5276;
+    --line: rgba(5, 38, 85, .14);
+    --veil: rgba(244, 247, 251, .62);
+    --gutter: clamp(20px, 5vw, 72px);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    min-height: 100svh;
+    background: #f4f7fb;
+    color: var(--ink);
+    font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Zamućena početna stranica u pozadini */
+  .bg {
+    position: fixed; inset: 0; z-index: 0; overflow: hidden;
+    pointer-events: none;
+  }
+  .bg__page {
+    position: absolute; left: -4%; right: -4%; top: 0;
+    height: 250vw; /* omjer slike 1200 x 3000 */
+    background: url("assets/pozadina-desktop.webp") top center / 100% auto no-repeat;
+    filter: blur(10px) saturate(1.15);
+    transform: translate3d(0, 0, 0) scale(1.04);
+    animation: drift 70s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0) scale(1.04); }
+    to   { transform: translate3d(0, calc(-250vw + 100vh), 0) scale(1.04); }
+  }
+  .bg::after {
+    content: ""; position: absolute; inset: 0;
+    background: var(--veil);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  /* Raspored */
+  .shell {
+    position: relative; z-index: 1;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: calc(env(safe-area-inset-top) + 24px) var(--gutter) calc(env(safe-area-inset-bottom) + 24px);
+  }
+  header {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .logo { display: block; width: clamp(96px, 9vw, 124px); }
+  .logo img { display: block; width: 100%; height: auto; }
+
+  .live {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 9px 14px 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .72);
+    font-size: 14px; font-weight: 500; letter-spacing: .01em;
+    white-space: nowrap;
+  }
+  .dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #1aa66a; }
+  .dot::after {
+    content: ""; position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid #1aa66a; opacity: 0;
+    animation: ping 2.4s cubic-bezier(.2,.6,.3,1) infinite;
+  }
+  @keyframes ping { 0% { transform: scale(.4); opacity: .7; } 100% { transform: scale(1.6); opacity: 0; } }
+
+  main {
+    align-self: center;
+    max-width: 1180px;
+    padding: clamp(48px, 9vh, 120px) 0;
+  }
+  .status {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 15px; font-weight: 600; color: var(--blue);
+    margin-bottom: clamp(20px, 3vh, 32px);
+  }
+  .bar {
+    position: relative; width: 72px; height: 2px; overflow: hidden;
+    background: rgba(7, 149, 219, .22); border-radius: 2px;
+  }
+  .bar::before {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 40%;
+    background: var(--blue); border-radius: 2px;
+    animation: load 1.8s cubic-bezier(.6,0,.4,1) infinite;
+  }
+  @keyframes load { from { left: -40%; } to { left: 100%; } }
+
+  h1 {
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(52px, 10.4vw, 168px);
+    line-height: .9;
+    letter-spacing: -.035em;
+    color: var(--navy);
+    text-wrap: balance;
+  }
+  .sub {
+    margin-top: clamp(20px, 3.2vh, 36px);
+    font-size: clamp(20px, 2.3vw, 32px);
+    font-weight: 500;
+    letter-spacing: -.01em;
+    line-height: 1.2;
+  }
+  .lead {
+    margin-top: 14px;
+    max-width: 40ch;
+    font-size: clamp(16px, 1.35vw, 19px);
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  footer {
+    display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: 18px 32px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--muted);
+  }
+  .checks { display: flex; flex-wrap: wrap; gap: 8px 28px; list-style: none; padding: 0; }
+  .checks li { display: inline-flex; align-items: center; gap: 8px; }
+  .checks strong { color: var(--ink); font-weight: 600; }
+  .ok { width: 16px; height: 16px; flex: none; }
+
+  @media (max-width: 759px) {
+    .bg__page {
+      left: 0; right: 0;
+      height: 1153.8vw; /* omjer slike 600 x 6923 */
+      background-image: url("assets/pozadina-mobitel.webp");
+      animation-name: drift-m; animation-duration: 120s;
+    }
+    @keyframes drift-m {
+      from { transform: translate3d(0, 0, 0) scale(1.06); }
+      to   { transform: translate3d(0, calc(-1153.8vw + 100vh), 0) scale(1.06); }
+    }
+    .live { font-size: 13px; padding: 8px 12px 8px 10px; }
+    main { align-self: end; padding-bottom: 40px; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg__page, .dot::after, .bar::before { animation: none; }
+    .bar::before { left: 0; width: 60%; }
+  }
+
+  /* Ulazna animacija */
+  .in { opacity: 0; transform: translateY(14px); animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+  .in:nth-child(2) { animation-delay: .08s; }
+  .in:nth-child(3) { animation-delay: .16s; }
+  .in:nth-child(4) { animation-delay: .24s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in { opacity: 1; transform: none; animation: none; } }
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><div class="bg__page"></div></div>
+
+  <div class="shell">
+    <header>
+      <a class="logo" href="/" aria-label="Cooldown Adria">
+        <img src="assets/logo.svg" alt="Cooldown Adria" width="124" height="71">
+      </a>
+      <span class="live" role="status"><span class="dot" aria-hidden="true"></span><span><span class="long">Domena je </span>aktivna</span></span>
+    </header>
+
+    <main>
+      <p class="status in"><span class="bar" aria-hidden="true"></span>Stranica je u izradi</p>
+      <h1 class="in">Hlađenje bez&nbsp;leda.</h1>
+      <p class="sub in">Ciljano hlađenje za podršku oporavku.</p>
+      <p class="lead in">Radimo na novoj stranici. Uskoro ovdje: kako ICE FLUID djeluje, kako se primjenjuje i koji set odgovara vama, vašem klubu ili klinici.</p>
+    </main>
+
+    <footer>
+      <ul class="checks">
+        <li>
+          <svg class="ok" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#1aa66a"/><path d="M4.6 8.3l2.2 2.1 4.6-4.7" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><strong id="domena">Domena</strong> je aktivna</span>
+        </li>
+        <li>
+          <svg class="ok" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="#0795db" stroke-width="2" stroke-dasharray="30 14"/></svg>
+          <span><strong>Nova stranica</strong> uskoro</span>
+        </li>
+      </ul>
+      <p>&copy; <span id="godina">2026</span> Cooldown Adria</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var host = location.hostname.replace(/^www\./, "");
+      if (host && host.indexOf(".") > 0 && !/github\.io$|vercel\.app$|netlify\.app$|^\d+\.\d+\.\d+\.\d+$/.test(host)) {
+        document.getElementById("domena").textContent = host;
+      }
+      document.getElementById("godina").textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
