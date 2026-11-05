@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cooldown Adria · Stranica u izradi</title>
-<meta name="description" content="Cooldown Adria. Stranica je u izradi.">
+<title>Cooldown Adria · WEB u izradi</title>
+<meta name="description" content="Cooldown Adria. WEB je u izradi.">
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#f4f7fb">
-<meta property="og:title" content="Cooldown Adria · Stranica u izradi">
+<meta property="og:title" content="Cooldown Adria · WEB u izradi">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="hr_HR">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -23,9 +23,10 @@
     --blue: #0795db;
   }
   * { box-sizing: border-box; margin: 0; }
-  html, body { height: 100%; }
+  html, body { height: 100%; max-width: 100%; overflow: hidden; overflow: clip; }
   body {
     min-height: 100svh;
+    position: relative;
     background: #f4f7fb;
     color: var(--navy);
     font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -36,7 +37,7 @@
   /* Zamućena početna stranica u pozadini */
   .bg { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
   .bg__page {
-    position: absolute; left: -4%; right: -4%; top: 0;
+    position: absolute; left: 0; right: 0; top: 0;
     height: 250vw; /* omjer slike 1200 x 3000 */
     background: url("assets/pozadina-desktop.webp") top center / 100% auto no-repeat;
     filter: blur(14px) saturate(1.15);
@@ -94,7 +95,20 @@
   }
   @keyframes ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
 
+  .copy {
+    position: fixed; z-index: 1;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+    font-size: 12px; font-weight: 500; letter-spacing: .02em;
+    color: rgba(5, 38, 85, .55);
+  }
+
   @media (max-width: 759px) {
+    .center { min-height: 100dvh; gap: 28px; padding: 24px 16px 56px; }
+    .logo { width: min(56vw, 210px); }
+    .status { padding: 13px 22px 13px 18px; font-size: 16px; gap: 12px; }
+    .dot { width: 9px; height: 9px; }
+    .copy { left: 0; right: 0; text-align: center; font-size: 11px; }
     .bg__page {
       left: 0; right: 0;
       height: 1153.8vw; /* omjer slike 600 x 6923 */
@@ -118,7 +132,9 @@
 
   <main class="center">
     <div class="logo"><img src="assets/logo.svg" alt="Cooldown Adria" width="300" height="172"></div>
-    <p class="status" role="status"><span class="dot" aria-hidden="true"></span>Stranica u izradi</p>
+    <p class="status" role="status"><span class="dot" aria-hidden="true"></span>WEB u izradi</p>
   </main>
+  <p class="copy">&copy; <span id="godina">2026</span> Cooldown Adria</p>
+  <script>document.getElementById("godina").textContent = new Date().getFullYear();</script>
 </body>
 </html>
